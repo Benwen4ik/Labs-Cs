@@ -72,9 +72,11 @@ namespace _1_лаба_ссп
             {
                 textBox1.Font = new Font(textBox1.Font.FontFamily, textBox1.Font.Size, FontStyle.Italic);
                 richTextBox1.SelectionFont = new Font(currentfont, FontStyle.Italic);
+                button2.BackColor = System.Drawing.Color.DarkGray;
             }
             else { textBox1.Font = new Font(textBox1.Font.FontFamily, textBox1.Font.Size, FontStyle.Regular);
                 richTextBox1.SelectionFont = new Font(currentfont, FontStyle.Regular);
+                button2.BackColor = System.Drawing.Color.White;
             }
 
         }
@@ -133,24 +135,16 @@ namespace _1_лаба_ссп
         bool isBoldEnabled = false; // Переменная для отслеживания состояния переключателя "Жирный/Не жирный"
 
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            isBoldEnabled = checkBox1.Checked;
+       
 
-            if (isBoldEnabled)
-            {
-                // richTextBox1.SelectionStart = richTextBox1.Text.Length ; // Устанавливаем курсор в конец текста
-                //   richTextBox1.SelectionLength = 0; // Снимаем выделение
-                // Применяем жирное форматирование к новому тексту
-                richTextBox1.Font = new Font(richTextBox1.Font.FontFamily , richTextBox1.Font.Size, FontStyle.Bold);
-            }
-            else
-            {
-                // Если переключатель не активен, используем обычное форматирование
-                richTextBox1.Font = new Font(richTextBox1.Font, FontStyle.Regular);
-            }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
-       
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
