@@ -44,39 +44,75 @@ namespace _1_лаба_ссп
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             string a = comboBox1.Items[comboBox1.SelectedIndex].ToString();
-            textBox1.Font = new Font(a, textBox1.Font.Size,textBox1.Font.Style);
+         //   textBox1.Font = new Font(a, textBox1.Font.Size,textBox1.Font.Style);
             richTextBox1.SelectionFont = new Font(a, richTextBox1.SelectionFont.Size, richTextBox1.SelectionFont.Style);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
             Font currentfont = richTextBox1.SelectionFont;
-            if (textBox1.Font.Bold == false)
+            if (richTextBox1.SelectionFont.Italic == false)
             {
-                textBox1.Font = new Font(textBox1.Font.FontFamily, textBox1.Font.Size, FontStyle.Bold);
-                richTextBox1.SelectionFont = new Font(currentfont, FontStyle.Bold);
-                button1.BackColor = System.Drawing.Color.DarkGray; 
-            }
-            else
+                if (richTextBox1.SelectionFont.Bold == false)
+                {
+                  //  textBox1.Font = new Font(textBox1.Font.FontFamily, textBox1.Font.Size, FontStyle.Bold);
+                    richTextBox1.SelectionFont = new Font(currentfont, FontStyle.Bold);
+                    button1.BackColor = System.Drawing.Color.DarkGray;
+                }
+                else
+                {
+                  //  textBox1.Font = new Font(textBox1.Font.FontFamily, textBox1.Font.Size, FontStyle.Regular);
+                    richTextBox1.SelectionFont = new Font(currentfont, FontStyle.Regular);
+                    button1.BackColor = System.Drawing.Color.White;
+                }
+            } else
             {
-                textBox1.Font = new Font(textBox1.Font.FontFamily, textBox1.Font.Size, FontStyle.Regular);
-                richTextBox1.SelectionFont = new Font(currentfont , FontStyle.Regular);
-                button1.BackColor = System.Drawing.Color.White ;
+                if (richTextBox1.SelectionFont.Bold == false)
+                {
+                  //  textBox1.Font = new Font(textBox1.Font.FontFamily, textBox1.Font.Size, FontStyle.Bold);
+                    richTextBox1.SelectionFont = new Font(currentfont, FontStyle.Bold | FontStyle.Italic);
+                    button1.BackColor = System.Drawing.Color.DarkGray;
+                }
+                else
+                {
+                   // textBox1.Font = new Font(textBox1.Font.FontFamily, textBox1.Font.Size, FontStyle.Regular);
+                    richTextBox1.SelectionFont = new Font(currentfont,  FontStyle.Italic);
+                    button1.BackColor = System.Drawing.Color.White;
+                }
             }
         } 
 
         private void button2_Click(object sender, EventArgs e)
         {
             Font currentfont = richTextBox1.SelectionFont;
-            if (textBox1.Font.Italic == false)
+            if (richTextBox1.SelectionFont.Bold == false)
             {
-                textBox1.Font = new Font(textBox1.Font.FontFamily, textBox1.Font.Size, FontStyle.Italic);
-                richTextBox1.SelectionFont = new Font(currentfont, FontStyle.Italic);
-                button2.BackColor = System.Drawing.Color.DarkGray;
-            }
-            else { textBox1.Font = new Font(textBox1.Font.FontFamily, textBox1.Font.Size, FontStyle.Regular);
-                richTextBox1.SelectionFont = new Font(currentfont, FontStyle.Regular);
-                button2.BackColor = System.Drawing.Color.White;
+                if (richTextBox1.SelectionFont.Italic == false)
+                {
+                  //  textBox1.Font = new Font(textBox1.Font.FontFamily, textBox1.Font.Size, FontStyle.Italic);
+                    richTextBox1.SelectionFont = new Font(currentfont, FontStyle.Italic);
+                    button2.BackColor = System.Drawing.Color.DarkGray;
+                }
+                else
+                {
+                 //   textBox1.Font = new Font(textBox1.Font.FontFamily, textBox1.Font.Size, FontStyle.Regular);
+                    richTextBox1.SelectionFont = new Font(currentfont, FontStyle.Regular);
+                    button2.BackColor = System.Drawing.Color.White;
+                }
+            } else
+            {
+                if (richTextBox1.SelectionFont.Italic == false)
+                {
+                  //  textBox1.Font = new Font(textBox1.Font.FontFamily, textBox1.Font.Size, FontStyle.Italic);
+                    richTextBox1.SelectionFont = new Font(currentfont, FontStyle.Italic | FontStyle.Bold);
+                    button2.BackColor = System.Drawing.Color.DarkGray;
+                }
+                else
+                {
+                  //  textBox1.Font = new Font(textBox1.Font.FontFamily, textBox1.Font.Size, FontStyle.Regular);
+                    richTextBox1.SelectionFont = new Font(currentfont, FontStyle.Bold);
+                    button2.BackColor = System.Drawing.Color.White;
+                }
             }
 
         }
@@ -84,7 +120,7 @@ namespace _1_лаба_ссп
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             int.TryParse ( comboBox2.Items[comboBox2.SelectedIndex].ToString(), out int b);
-            textBox1.Font = new Font(textBox1.Font.FontFamily, b, textBox1.Font.Style);
+        //    textBox1.Font = new Font(textBox1.Font.FontFamily, b, textBox1.Font.Style);
             richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, b, richTextBox1.SelectionFont.Style);
         }
 
@@ -94,27 +130,27 @@ namespace _1_лаба_ссп
             switch (c)
             {
                 case "Черный":
-                    textBox1.ForeColor = System.Drawing.Color.Black;
+           //         textBox1.ForeColor = System.Drawing.Color.Black;
                     //richTextBox1.ForeColor = System.Drawing.Color.Black;
                     richTextBox1.SelectionColor = System.Drawing.Color.Black;
                     break;
                 case "Красный":
-                    textBox1.ForeColor = System.Drawing.Color.Red;
+              //      textBox1.ForeColor = System.Drawing.Color.Red;
                     //richTextBox1.ForeColor = System.Drawing.Color.Red;
                     richTextBox1.SelectionColor = System.Drawing.Color.Red;
                     break;
                 case "Желтый":
-                    textBox1.ForeColor = System.Drawing.Color.Gold;
+               //     textBox1.ForeColor = System.Drawing.Color.Gold;
                     // richTextBox1.ForeColor = System.Drawing.Color.Gold;
                     richTextBox1.SelectionColor = System.Drawing.Color.Gold;
                     break;
                 case "Синий":
-                    textBox1.ForeColor = System.Drawing.Color.Blue;
+               //     textBox1.ForeColor = System.Drawing.Color.Blue;
                     // richTextBox1.ForeColor = System.Drawing.Color.Blue;
                     richTextBox1.SelectionColor = System.Drawing.Color.Blue;
                     break;
                 default :
-                    textBox1.ForeColor = System.Drawing.Color.Black;
+             //       textBox1.ForeColor = System.Drawing.Color.Black;
                     // richTextBox1.ForeColor = System.Drawing.Color.Black;
                     richTextBox1.SelectionColor = System.Drawing.Color.Black;
                     break;
