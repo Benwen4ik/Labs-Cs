@@ -102,7 +102,7 @@ namespace _1_лаба_ссп
             this.richTextBox1.Size = new System.Drawing.Size(366, 175);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+          //  this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // contextMenuStrip1
             // 
@@ -118,7 +118,7 @@ namespace _1_лаба_ссп
             this.label1.Size = new System.Drawing.Size(57, 20);
             this.label1.TabIndex = 10;
             this.label1.Text = "Шрифт";
-            this.label1.Click += new System.EventHandler(this.label1_Click_1);
+           // this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // label2
             // 
@@ -155,7 +155,7 @@ namespace _1_лаба_ссп
             this.Controls.Add(this.comboBox1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+          //  this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
