@@ -40,6 +40,7 @@ namespace _1_лаба_ссп
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -102,7 +103,6 @@ namespace _1_лаба_ссп
             this.richTextBox1.Size = new System.Drawing.Size(366, 175);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
-          //  this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // contextMenuStrip1
             // 
@@ -118,7 +118,6 @@ namespace _1_лаба_ссп
             this.label1.Size = new System.Drawing.Size(57, 20);
             this.label1.TabIndex = 10;
             this.label1.Text = "Шрифт";
-           // this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // label2
             // 
@@ -138,12 +137,23 @@ namespace _1_лаба_ссп
             this.label3.TabIndex = 12;
             this.label3.Text = "Цвет";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(451, 359);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(94, 29);
+            this.button3.TabIndex = 13;
+            this.button3.Text = "Палитра";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -154,8 +164,7 @@ namespace _1_лаба_ссп
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
-          //  this.Load += new System.EventHandler(this.Form1_Load);
+            this.Text = "ПОСТАВЬТЕ 4+";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -172,6 +181,7 @@ namespace _1_лаба_ссп
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button3;
     }
 }
 

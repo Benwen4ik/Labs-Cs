@@ -33,13 +33,13 @@ namespace _1_лаба_ссп
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             string a = comboBox1.Items[comboBox1.SelectedIndex].ToString();
+            var start = richTextBox1.SelectionStart;
+            var startlen = richTextBox1.SelectionLength;
             if (richTextBox1.SelectionFont != null)
             {
                 richTextBox1.SelectionFont = new Font(a, richTextBox1.SelectionFont.Size, richTextBox1.SelectionFont.Style);
             } else
             {
-                var start = richTextBox1.SelectionStart;
-                var startlen = richTextBox1.SelectionLength;
                 for (int k = 0; k < startlen; k++)
                 {
                     richTextBox1.Select(start + k, 1);
@@ -56,7 +56,7 @@ namespace _1_лаба_ссп
                 richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, richTextBox1.SelectionFont.Size,
                         Use_BoldStyle());
             } else
-            {
+            { 
                 var start = richTextBox1.SelectionStart;
                 var startlen = richTextBox1.SelectionLength;
                 for (int k=0;k<startlen;k++)
@@ -176,25 +176,47 @@ namespace _1_лаба_ссп
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
             string c = comboBox3.Items[comboBox3.SelectedIndex].ToString();
-            switch (c)
-            {
-                case "Черный":
-                    richTextBox1.SelectionColor = System.Drawing.Color.Black;
-                    break;
-                case "Красный":
-                    richTextBox1.SelectionColor = System.Drawing.Color.Red;
-                    break;
-                case "Желтый":
-                    richTextBox1.SelectionColor = System.Drawing.Color.Gold;
-                    break;
-                case "Синий":
-                    richTextBox1.SelectionColor = System.Drawing.Color.Blue;
-                    break;
-                default:
-                    richTextBox1.SelectionColor = System.Drawing.Color.Black;
-                    break;
-            }
+          //  var start = richTextBox1.SelectionStart;
+         //   var startlen = richTextBox1.SelectionLength;
+         //   for (int k = 0; k < startlen; k++)
+          //  {
+           //     richTextBox1.Select(start + k,1);
+                switch (c)
+                {
+                    case "Черный":
+                        richTextBox1.SelectionColor = System.Drawing.Color.Black;
+                        break;
+                    case "Красный":
+                        richTextBox1.SelectionColor = System.Drawing.Color.Red;
+                        break;
+                    case "Желтый":
+                        richTextBox1.SelectionColor = System.Drawing.Color.Gold;
+                        break;
+                    case "Синий":
+                        richTextBox1.SelectionColor = System.Drawing.Color.Blue;
+                        break;
+                    default:
+                        richTextBox1.SelectionColor = System.Drawing.Color.Black;
+                        break;
+                }
 
+        //    }
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ColorDialog MyDialog = new ColorDialog();
+            // Keeps the user from selecting a custom color.
+            MyDialog.AllowFullOpen = false;
+            // Allows the user to get help. (The default is false.)
+            MyDialog.ShowHelp = true;
+            // Sets the initial color select to the current text color.
+            MyDialog.Color = richTextBox1.SelectionColor;
+
+            // Update the text box color if the user clicks OK  
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+                richTextBox1.SelectionColor = MyDialog.Color;
         }
     }
 }
