@@ -164,7 +164,7 @@ namespace _1_лаба_ссп
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
             this.Name = "Form1";
-            this.Text = "ПОСТАВЬТЕ 4+";
+            this.Text = "зонби дабалатория;";
             this.ResumeLayout(false);
             this.PerformLayout();
 
