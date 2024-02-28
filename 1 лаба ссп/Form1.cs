@@ -16,18 +16,18 @@ namespace _1_лаба_ссп
         {
             String[] font = new string[] { "Segoe UI", "Arial", "Times New Roman", "Segoe Script", "Broadway", "Tahoma" };
             String[] size = new string[] { "9", "12", "15", "18", "Test" };
-            String[] colors = new string[] { "Черный", "Красный", "Желтый", "Синий" };
-            var strings = Enumerable.Range(9, 45).Select(i => i.ToString()).ToArray();
+          //  String[] colors = new string[] { "Черный", "Красный", "Желтый", "Синий" };
+         //   var strings = Enumerable.Range(9, 45).Select(i => i.ToString()).ToArray();
             InitializeComponent();  
             comboBox1.Items.AddRange(font);
-            comboBox2.Items.AddRange(strings);
-            comboBox3.Items.AddRange(colors);
+         //   comboBox2.Items.AddRange(strings);
+      //      comboBox3.Items.AddRange(colors);
             comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
-            comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+       //     comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+     //       comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBox1.SelectedIndex = 0;
-            comboBox2.SelectedIndex = 0;
-            comboBox3.SelectedIndex = 0;
+         //   comboBox2.SelectedIndex = 0;
+       //     comboBox3.SelectedIndex = 0;
         }
 
 
@@ -158,11 +158,30 @@ namespace _1_лаба_ссп
 
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            int.TryParse(comboBox2.Text.ToString(), out int b);
-            // int.TryParse(comboBox2.SelectedItem, out int b);
-            if (b == 0) b = 9;
+            ColorDialog MyDialog = new ColorDialog();
+            MyDialog.AllowFullOpen = false;
+            MyDialog.ShowHelp = true;
+            MyDialog.Color = richTextBox1.SelectionColor;
+
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.SelectionColor = MyDialog.Color;
+                if (MyDialog.Color == Color.Black) button3.BackColor = Color.White;
+                else button3.BackColor = MyDialog.Color;
+            }
+        }
+
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ToolTip tool = new ToolTip();
+            int.TryParse(textBox1.Text.ToString(), out int b);
+            if (b < 9) { MessageBox.Show(textBox1, "Допустимые значение размера шрифта 9-45"); 
+                b = ((int)richTextBox1.SelectionFont.Size) ; }
+            if (b > 45) { MessageBox.Show(textBox1, "Допустимые значение размера шрифта 9-45");
+                b = ((int)richTextBox1.SelectionFont.Size);}
             if (richTextBox1.SelectionFont != null)
             {
                 richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, b, richTextBox1.SelectionFont.Style);
@@ -179,81 +198,9 @@ namespace _1_лаба_ссп
                 richTextBox1.SelectionStart = start;
                 richTextBox1.SelectionLength = startlen;
             }
+            //      }
+            // else MessageBox.Show(comboBox2, "Error");
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string c = comboBox3.Items[comboBox3.SelectedIndex].ToString();
-            //  var start = richTextBox1.SelectionStart;
-            //   var startlen = richTextBox1.SelectionLength;
-            //   for (int k = 0; k < startlen; k++)
-            //  {
-            //     richTextBox1.Select(start + k,1);
-            switch (c)
-            {
-                case "Черный":
-                    richTextBox1.SelectionColor = System.Drawing.Color.Black;
-                    button3.BackColor = System.Drawing.Color.White;
-                    break;
-                case "Красный":
-                    richTextBox1.SelectionColor = System.Drawing.Color.Red;
-                    button3.BackColor = System.Drawing.Color.Red;
-                    break;
-                case "Желтый":
-                    richTextBox1.SelectionColor = System.Drawing.Color.Gold;
-                    button3.BackColor = System.Drawing.Color.Gold;
-                    break;
-                case "Синий":
-                    richTextBox1.SelectionColor = System.Drawing.Color.Blue;
-                    button3.BackColor = System.Drawing.Color.Blue;
-                    break;
-                default:
-                    richTextBox1.SelectionColor = System.Drawing.Color.Black;
-                    button3.BackColor = System.Drawing.Color.White;
-                    break;
-            }
-
-            //    }
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            ColorDialog MyDialog = new ColorDialog();
-            MyDialog.AllowFullOpen = false;
-            MyDialog.ShowHelp = true;
-            MyDialog.Color = richTextBox1.SelectionColor;
-
-            if (MyDialog.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.SelectionColor = MyDialog.Color;
-                if (MyDialog.Color == Color.Black) button3.BackColor = Color.White;
-                else button3.BackColor = MyDialog.Color;
-            }
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            int.TryParse(comboBox2.Items[comboBox2.SelectedIndex].ToString(), out int b);
-            if (b > 5 && b < 72)
-            {
-                if (richTextBox1.SelectionFont != null)
-                {
-                    richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, b, richTextBox1.SelectionFont.Style);
-                }
-                else
-                {
-                    var start = richTextBox1.SelectionStart;
-                    var startlen = richTextBox1.SelectionLength;
-                    for (int k = 0; k < startlen; k++)
-                    {
-                        richTextBox1.Select(start + k, 1);
-                        richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, b, richTextBox1.SelectionFont.Style);
-                    }
-                    richTextBox1.SelectionStart = start;
-                    richTextBox1.SelectionLength = startlen;
-                }
-            }
-        }
     }
 }
