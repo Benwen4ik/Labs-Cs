@@ -14,15 +14,16 @@ namespace _1_лаба_ссп
     {
         public Form1()
         {
-            String[] font = new string[] { "Segoe UI", "Arial", "Times New Roman", "Segoe Script" };
-            String[] size = new string[] { "9", "12", "15", "18" };
+            String[] font = new string[] { "Segoe UI", "Arial", "Times New Roman", "Segoe Script", "Broadway", "Tahoma" };
+            String[] size = new string[] { "9", "12", "15", "18", "Test" };
             String[] colors = new string[] { "Черный", "Красный", "Желтый", "Синий" };
-            InitializeComponent();
-            comboBox1.Items.AddRange(font); 
-            comboBox2.Items.AddRange(size);
+            var strings = Enumerable.Range(9, 45).Select(i => i.ToString()).ToArray();
+            InitializeComponent();  
+            comboBox1.Items.AddRange(font);
+            comboBox2.Items.AddRange(strings);
             comboBox3.Items.AddRange(colors);
             comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
@@ -38,7 +39,8 @@ namespace _1_лаба_ссп
             if (richTextBox1.SelectionFont != null)
             {
                 richTextBox1.SelectionFont = new Font(a, richTextBox1.SelectionFont.Size, richTextBox1.SelectionFont.Style);
-            } else
+            }
+            else
             {
                 for (int k = 0; k < startlen; k++)
                 {
@@ -52,14 +54,16 @@ namespace _1_лаба_ссп
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            if (richTextBox1.SelectionFont != null) {
+            if (richTextBox1.SelectionFont != null)
+            {
                 richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, richTextBox1.SelectionFont.Size,
                         Use_BoldStyle());
-            } else
-            { 
+            }
+            else
+            {
                 var start = richTextBox1.SelectionStart;
                 var startlen = richTextBox1.SelectionLength;
-                for (int k=0;k<startlen;k++)
+                for (int k = 0; k < startlen; k++)
                 {
                     richTextBox1.Select(start + k, 1);
                     richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, richTextBox1.SelectionFont.Size,
@@ -68,7 +72,7 @@ namespace _1_лаба_ссп
                 richTextBox1.SelectionStart = start;
                 richTextBox1.SelectionLength = startlen;
             }
-        } 
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -76,7 +80,8 @@ namespace _1_лаба_ссп
             {
                 richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, richTextBox1.SelectionFont.Size,
                         Use_ItalicStyle());
-            } else
+            }
+            else
             {
                 var start = richTextBox1.SelectionStart;
                 var startlen = richTextBox1.SelectionLength;
@@ -156,14 +161,17 @@ namespace _1_лаба_ссп
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             int.TryParse(comboBox2.Text.ToString(), out int b);
-            if (richTextBox1.SelectionFont != null )
+            // int.TryParse(comboBox2.SelectedItem, out int b);
+            if (b == 0) b = 9;
+            if (richTextBox1.SelectionFont != null)
             {
                 richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, b, richTextBox1.SelectionFont.Style);
-            } else
+            }
+            else
             {
                 var start = richTextBox1.SelectionStart;
                 var startlen = richTextBox1.SelectionLength;
-                for (int k=0; k< startlen; k++)
+                for (int k = 0; k < startlen; k++)
                 {
                     richTextBox1.Select(start + k, 1);
                     richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, b, richTextBox1.SelectionFont.Style);
@@ -176,36 +184,36 @@ namespace _1_лаба_ссп
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
             string c = comboBox3.Items[comboBox3.SelectedIndex].ToString();
-          //  var start = richTextBox1.SelectionStart;
-         //   var startlen = richTextBox1.SelectionLength;
-         //   for (int k = 0; k < startlen; k++)
-          //  {
-           //     richTextBox1.Select(start + k,1);
-                switch (c)
-                {
-                    case "Черный":
-                        richTextBox1.SelectionColor = System.Drawing.Color.Black;
-                        button3.BackColor = System.Drawing.Color.White;
-                        break;
-                    case "Красный":
-                        richTextBox1.SelectionColor = System.Drawing.Color.Red;
-                        button3.BackColor = System.Drawing.Color.Red;
+            //  var start = richTextBox1.SelectionStart;
+            //   var startlen = richTextBox1.SelectionLength;
+            //   for (int k = 0; k < startlen; k++)
+            //  {
+            //     richTextBox1.Select(start + k,1);
+            switch (c)
+            {
+                case "Черный":
+                    richTextBox1.SelectionColor = System.Drawing.Color.Black;
+                    button3.BackColor = System.Drawing.Color.White;
                     break;
-                    case "Желтый":
-                        richTextBox1.SelectionColor = System.Drawing.Color.Gold;
-                        button3.BackColor = System.Drawing.Color.Gold;
+                case "Красный":
+                    richTextBox1.SelectionColor = System.Drawing.Color.Red;
+                    button3.BackColor = System.Drawing.Color.Red;
                     break;
-                    case "Синий":
-                        richTextBox1.SelectionColor = System.Drawing.Color.Blue;
-                        button3.BackColor = System.Drawing.Color.Blue;
+                case "Желтый":
+                    richTextBox1.SelectionColor = System.Drawing.Color.Gold;
+                    button3.BackColor = System.Drawing.Color.Gold;
                     break;
-                    default:
-                        richTextBox1.SelectionColor = System.Drawing.Color.Black;
-                        button3.BackColor = System.Drawing.Color.White;
+                case "Синий":
+                    richTextBox1.SelectionColor = System.Drawing.Color.Blue;
+                    button3.BackColor = System.Drawing.Color.Blue;
                     break;
-                }
+                default:
+                    richTextBox1.SelectionColor = System.Drawing.Color.Black;
+                    button3.BackColor = System.Drawing.Color.White;
+                    break;
+            }
 
-        //    }
+            //    }
 
         }
 
@@ -247,7 +255,5 @@ namespace _1_лаба_ссп
                 }
             }
         }
-
-        
     }
 }

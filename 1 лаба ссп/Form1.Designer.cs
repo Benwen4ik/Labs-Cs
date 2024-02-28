@@ -122,11 +122,11 @@ namespace _1_лаба_ссп
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(176, 301);
+            this.label2.Location = new System.Drawing.Point(136, 301);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 20);
+            this.label2.Size = new System.Drawing.Size(100, 20);
             this.label2.TabIndex = 11;
-            this.label2.Text = "Размер";
+            this.label2.Text = "Размер(9-45)";
             // 
             // label3
             // 
