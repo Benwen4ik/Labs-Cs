@@ -15,19 +15,10 @@ namespace _1_лаба_ссп
         public Form1()
         {
             String[] font = new string[] { "Segoe UI", "Arial", "Times New Roman", "Segoe Script", "Broadway", "Tahoma" };
-            String[] size = new string[] { "9", "12", "15", "18", "Test" };
-          //  String[] colors = new string[] { "Черный", "Красный", "Желтый", "Синий" };
-         //   var strings = Enumerable.Range(9, 45).Select(i => i.ToString()).ToArray();
             InitializeComponent();  
             comboBox1.Items.AddRange(font);
-         //   comboBox2.Items.AddRange(strings);
-      //      comboBox3.Items.AddRange(colors);
             comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-       //     comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
-     //       comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBox1.SelectedIndex = 0;
-         //   comboBox2.SelectedIndex = 0;
-       //     comboBox3.SelectedIndex = 0;
         }
 
 
@@ -168,8 +159,16 @@ namespace _1_лаба_ссп
             if (MyDialog.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.SelectionColor = MyDialog.Color;
-                if (MyDialog.Color == Color.Black) button3.BackColor = Color.White;
-                else button3.BackColor = MyDialog.Color;
+                if (MyDialog.Color == Color.Black)
+                {
+                    button3.BackColor = Color.Black;
+                    button3.ForeColor = Color.White;
+                }
+                else
+                {
+                    button3.BackColor = MyDialog.Color;
+                    button3.ForeColor = Color.Black; 
+                }
             }
         }
 

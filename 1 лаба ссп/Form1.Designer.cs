@@ -118,12 +118,14 @@ namespace _1_лаба_ссп
             // 
             // button3
             // 
+            this.button3.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.button3.Location = new System.Drawing.Point(314, 358);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(94, 29);
             this.button3.TabIndex = 13;
             this.button3.Text = "Палитра";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // textBox1
