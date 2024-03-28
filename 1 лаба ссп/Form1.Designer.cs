@@ -82,6 +82,8 @@ namespace _1_лаба_ссп
             this.richTextBox1.Size = new System.Drawing.Size(366, 175);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
+            this.richTextBox1.SelectionChanged += new System.EventHandler(this.richTextBox1_SelectionChanged);
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // contextMenuStrip1
             // 

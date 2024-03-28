@@ -12,19 +12,24 @@ namespace _1_лаба_ссп
 {
     public partial class Form1 : Form
     {
+        String[] font =  { "Segoe UI", "Arial", "Times New Roman", "Segoe Script", "Broadway", "Tahoma" };
+
+        Font lastFont = new Font("Segoe UI",9);
+        Color lastColor = Color.Black;
         public Form1()
         {
-            String[] font = new string[] { "Segoe UI", "Arial", "Times New Roman", "Segoe Script", "Broadway", "Tahoma" };
-            InitializeComponent();  
+            //String[] font = new string[] { "Segoe UI", "Arial", "Times New Roman", "Segoe Script", "Broadway", "Tahoma" };
+            InitializeComponent();
             comboBox1.Items.AddRange(font);
             comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBox1.SelectedIndex = 0;
+            richTextBox1.SelectionChanged += richTextBox1_SelectionChanged;
         }
-
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string a = comboBox1.Items[comboBox1.SelectedIndex].ToString();
+            //if (comboBox1.Items == null) comboBox1.SelectedIndex = 0;
+            // string a = comboBox1.Items[comboBox1.SelectedIndex].ToString();
+            string a = font[comboBox1.SelectedIndex].ToString();
             var start = richTextBox1.SelectionStart;
             var startlen = richTextBox1.SelectionLength;
             if (richTextBox1.SelectionFont != null)
@@ -41,6 +46,8 @@ namespace _1_лаба_ссп
                 richTextBox1.SelectionStart = start;
                 richTextBox1.SelectionLength = startlen;
             }
+            richTextBox1.Focus();
+            if (richTextBox1.Text.Length != 0) lastFont = richTextBox1.SelectionFont;
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -63,6 +70,8 @@ namespace _1_лаба_ссп
                 richTextBox1.SelectionStart = start;
                 richTextBox1.SelectionLength = startlen;
             }
+            richTextBox1.Focus();
+            if (richTextBox1.Text.Length != 0) lastFont = richTextBox1.SelectionFont;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -70,7 +79,7 @@ namespace _1_лаба_ссп
             if (richTextBox1.SelectionFont != null)
             {
                 richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, richTextBox1.SelectionFont.Size,
-                        Use_ItalicStyle());
+                Use_ItalicStyle());
             }
             else
             {
@@ -80,12 +89,13 @@ namespace _1_лаба_ссп
                 {
                     richTextBox1.Select(start + k, 1);
                     richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, richTextBox1.SelectionFont.Size,
-                        Use_ItalicStyle());
+                    Use_ItalicStyle());
                 }
                 richTextBox1.SelectionStart = start;
                 richTextBox1.SelectionLength = startlen;
             }
-
+            richTextBox1.Focus();
+            if (richTextBox1.Text.Length != 0) lastFont = richTextBox1.SelectionFont;
         }
 
         private FontStyle Use_BoldStyle()
@@ -167,9 +177,12 @@ namespace _1_лаба_ссп
                 else
                 {
                     button3.BackColor = MyDialog.Color;
-                    button3.ForeColor = Color.Black; 
+                    button3.ForeColor = Color.Black;
                 }
             }
+            richTextBox1.Focus();
+            // lastFont = richTextBox1.SelectionFont;
+            if (richTextBox1.Text.Length != 0) lastColor = richTextBox1.SelectionColor;
         }
 
 
@@ -177,10 +190,16 @@ namespace _1_лаба_ссп
         {
             ToolTip tool = new ToolTip();
             int.TryParse(textBox1.Text.ToString(), out int b);
-            if (b < 9) { MessageBox.Show(textBox1, "Допустимые значение размера шрифта 9-45"); 
-                b = ((int)richTextBox1.SelectionFont.Size) ; }
-            if (b > 45) { MessageBox.Show(textBox1, "Допустимые значение размера шрифта 9-45");
-                b = ((int)richTextBox1.SelectionFont.Size);}
+            if (b < 9)
+            {
+                MessageBox.Show(textBox1, "Допустимые значение размера шрифта 9-45");
+                b = ((int)richTextBox1.SelectionFont.Size);
+            }
+            if (b > 45)
+            {
+                MessageBox.Show(textBox1, "Допустимые значение размера шрифта 9-45");
+                b = ((int)richTextBox1.SelectionFont.Size);
+            }
             if (richTextBox1.SelectionFont != null)
             {
                 richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, b, richTextBox1.SelectionFont.Style);
@@ -197,9 +216,47 @@ namespace _1_лаба_ссп
                 richTextBox1.SelectionStart = start;
                 richTextBox1.SelectionLength = startlen;
             }
-            //      }
-            // else MessageBox.Show(comboBox2, "Error");
+            richTextBox1.Focus();
+            if (richTextBox1.Text.Length != 0) lastFont = richTextBox1.SelectionFont;
+        }
+        private void richTextBox1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (richTextBox1.SelectionFont != null)
+            {
+                textBox1.Text = richTextBox1.SelectionFont.Size.ToString(); // Update the TextBox with the font size
+
+                if (richTextBox1.SelectionColor == Color.Black)
+                {
+                    button3.BackColor = Color.Black;
+                    button3.ForeColor = Color.White;
+                }
+                else
+                {
+                    button3.BackColor = richTextBox1.SelectionColor;
+                    button3.ForeColor = Color.Black;
+                }
+                if (Array.IndexOf(font, richTextBox1.SelectionFont.Name.ToString()) != -1)
+                {
+                    comboBox1.SelectedIndex = Array.IndexOf(font, richTextBox1.SelectionFont.Name.ToString());
+                }
+                if (richTextBox1.SelectionFont.Bold == true) button1.BackColor = System.Drawing.Color.DarkGray;
+                else button1.BackColor = System.Drawing.Color.White;
+                if (richTextBox1.SelectionFont.Italic == true) button2.BackColor = System.Drawing.Color.DarkGray;
+                else button2.BackColor = System.Drawing.Color.White;
+                if (richTextBox1.Text.Length != 0) { 
+                    //lastFont = richTextBox1.SelectionFont;
+                   // lastColor = button3.BackColor;
+                }
+            }
         }
 
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (richTextBox1.Text.Length == 0)
+            {
+                richTextBox1.SelectionFont = lastFont;
+                richTextBox1.SelectionColor = lastColor;
+            }
+        }
     }
 }
