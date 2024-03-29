@@ -21,9 +21,11 @@ namespace _1_лаба_ссп
 
 
         List<Font> listfont = new List<Font> { };
+        List<Color> listcolor = new  List<Color> ();
         int combobox2;
 
-        static string path1 = @"C:\note.txt";   // путь к файлу
+
+        static string path1 = @"C:\laba1.docx";   // путь к файлу
         static string path2 = @"C:\set.txt";
       
         public Form1()
@@ -34,6 +36,8 @@ namespace _1_лаба_ссп
             comboBox1.Items.AddRange(font);
             comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBox1.SelectedIndex = 0;
+            comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+           // comboBox2.SelectedIndex = 0;
             richTextBox1.SelectionChanged += richTextBox1_SelectionChanged;
             //SaveFileDialog saveFileDialog = new SaveFileDialog();
             // saveFileDialog.Filter = 
@@ -332,42 +336,10 @@ namespace _1_лаба_ссп
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             int a = comboBox2.SelectedIndex;
-            ChangedParam(listfont[a], Color.Black);
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            using (FileStream fstream = File.OpenRead(path1))
-            {
-                // выделяем массив для считывания данных из файла
-                byte[] buffer = new byte[fstream.Length];
-                // считываем данные
-                fstream.Read(buffer);
-                // декодируем байты в строку
-                string textFromFile = UTF32Encoding.Default.GetString(buffer);
-                richTextBox1.Text = textFromFile;
-            }
-           
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            using (FileStream fstream = new FileStream(path1, FileMode.Truncate))
-            {
-                // преобразуем строку в байты
-                byte[] buffer = Encoding.Default.GetBytes(richTextBox1.Text);
-                // запись массива байтов в файл
-                fstream.Write(buffer, 0, buffer.Length);
-            }
-            using (FileStream fstream = new FileStream(path2, FileMode.Truncate))
-            {
-                // преобразуем строку в байты
-                string jsonString = JsonSerializer.Serialize(listfont);
-                byte[] buffer = Encoding.Default.GetBytes(jsonString);
-                // запись массива байтов в файл
-                fstream.Write(buffer);
-            }
+            ChangedParam(listfont[a], listcolor[a]);
+            richTextBox1.SelectionFont = new Font(listfont[a].FontFamily, listfont[a].Size, listfont[a].Style);
+            richTextBox1.SelectionColor = listcolor[a];
+            richTextBox1.Focus();
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -375,9 +347,23 @@ namespace _1_лаба_ссп
             if (richTextBox1.Text.Length != 0)
             {
                 listfont.Add(richTextBox1.SelectionFont);
+                listcolor.Add(richTextBox1.SelectionColor);
                 combobox2++;
-                comboBox2.Items.Add("Стиль" + combobox2);
+                comboBox2.Items.Add("Стиль " + combobox2);
             }
+            richTextBox1.Focus();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SaveFile(@"C:\yest");
+            richTextBox1.Focus();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            richTextBox1.LoadFile(@"C:\yest");
+            richTextBox1.Focus();
         }
     }
 }
