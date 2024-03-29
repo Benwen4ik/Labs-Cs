@@ -256,6 +256,38 @@ namespace _1_лаба_ссп
             {
                 richTextBox1.SelectionFont = lastFont;
                 richTextBox1.SelectionColor = lastColor;
+                ChangedParam(lastFont, lastColor);
+            }
+        }
+
+        private void ChangedParam(Font changeFont, Color color)
+        {
+            if (changeFont != null)
+            {
+                textBox1.Text = changeFont.Size.ToString(); // Update the TextBox with the font size
+                if (color == Color.Black)
+                {
+                    button3.BackColor = Color.Black;
+                    button3.ForeColor = Color.White;
+                }
+                else
+                {
+                    button3.BackColor = color;
+                    button3.ForeColor = Color.Black;
+                }
+                if (Array.IndexOf(font, changeFont.Name.ToString()) != -1)
+                {
+                    comboBox1.SelectedIndex = Array.IndexOf(font, changeFont.Name.ToString());
+                }
+                if (changeFont.Bold == true) button1.BackColor = System.Drawing.Color.DarkGray;
+                else button1.BackColor = System.Drawing.Color.White;
+                if (changeFont.Italic == true) button2.BackColor = System.Drawing.Color.DarkGray;
+                else button2.BackColor = System.Drawing.Color.White;
+                if (richTextBox1.Text.Length != 0)
+                {
+                    //lastFont = richTextBox1.SelectionFont;
+                    // lastColor = button3.BackColor;
+                }
             }
         }
     }
