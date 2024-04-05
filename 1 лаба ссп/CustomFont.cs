@@ -36,5 +36,15 @@ namespace _1_лаба_ссп
             this.fontStyle = fontStyle;
             this.color = color;
         }
+
+
+        public  bool EqualsCustom(CustomFont font)
+        {
+            return 
+                   this.fontFamily == font.fontFamily &&
+                   this.size == font.size &&
+                   this.fontStyle == font.fontStyle &&
+                   this.color.Equals(font.color);
+        }
     }
 }

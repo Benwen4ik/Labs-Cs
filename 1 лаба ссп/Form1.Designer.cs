@@ -45,6 +45,7 @@ namespace _1_лаба_ссп
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -163,7 +164,7 @@ namespace _1_лаба_ссп
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(612, 176);
+            this.button7.Location = new System.Drawing.Point(600, 176);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(152, 29);
             this.button7.TabIndex = 19;
@@ -191,12 +192,22 @@ namespace _1_лаба_ссп
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(601, 39);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(50, 20);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Стили";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
@@ -234,6 +245,7 @@ namespace _1_лаба_ссп
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Label label4;
     }
 }
 

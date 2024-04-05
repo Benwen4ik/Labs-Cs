@@ -23,8 +23,11 @@ namespace _1_лаба_ссп
 
         List<CustomFont> listfont = new List<CustomFont> { };
         int combobox2;
+        string jsonfile = @"C:\listfont2.json";
+        string textfile = @"C:\test";
 
-      
+
+
         public Form1()
         {
 
@@ -37,23 +40,6 @@ namespace _1_лаба_ссп
             richTextBox1.SelectionChanged += richTextBox1_SelectionChanged;
             //SaveFileDialog saveFileDialog = new SaveFileDialog();
             // saveFileDialog.Filter = 
-            try
-            {
-                string jsonstring = File.ReadAllText(@"C:\listfont.json");
-                var output = JsonConvert.DeserializeObject<List<CustomFont>>(jsonstring);
-                listfont = output;
-                combobox2 = listfont.Count;
-                // listfont.Add(output[0]);
-                //listfont = System.Text.Json.JsonSerializer.Deserialize<List<CustomFont>>(jsonstring);
-                if (listfont != null)
-                {
-                    for (int i = 1; i <= listfont.Count; i++) comboBox2.Items.Add("Стиль " + i);
-                }
-            }
-            catch 
-            {
-                Console.WriteLine("Error: ");
-            }
         } 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -80,8 +66,7 @@ namespace _1_лаба_ссп
             if (richTextBox1.Text.Length != 0)
             {
                 lastFont = richTextBox1.SelectionFont;
-              //  listfont.Add(richTextBox1.SelectionFont);
-               // combobox2++;
+               // ChangedFont();
             }
         }
 
@@ -109,8 +94,7 @@ namespace _1_лаба_ссп
             if (richTextBox1.Text.Length != 0)
             {
                 lastFont = richTextBox1.SelectionFont;
-              //  listfont.Add(richTextBox1.SelectionFont);
-              //  combobox2++;
+              //  ChangedFont();
             }
         }
 
@@ -138,8 +122,7 @@ namespace _1_лаба_ссп
             if (richTextBox1.Text.Length != 0)
             {
                 lastFont = richTextBox1.SelectionFont;
-              //  listfont.Add(richTextBox1.SelectionFont);
-             //   combobox2++;
+               // ChangedFont();
             }
         }
 
@@ -230,8 +213,7 @@ namespace _1_лаба_ссп
             if (richTextBox1.Text.Length != 0)
             {
                 lastColor = richTextBox1.SelectionColor;
-             //   listfont.Add(richTextBox1.SelectionFont);
-              //  combobox2++;
+               // ChangedFont();
             }
         }
 
@@ -270,15 +252,14 @@ namespace _1_лаба_ссп
             if (richTextBox1.Text.Length != 0)
             {
                 lastFont = richTextBox1.SelectionFont;
-              //  listfont.Add(richTextBox1.SelectionFont);
-              //  combobox2++;
+              //  ChangedFont();
             }
         }
         private void richTextBox1_SelectionChanged(object sender, EventArgs e)
         {
             if (richTextBox1.SelectionFont != null)
             {
-                textBox1.Text = richTextBox1.SelectionFont.Size.ToString(); // Update the TextBox with the font size
+                textBox1.Text = richTextBox1.SelectionFont.Size.ToString(); 
 
                 if (richTextBox1.SelectionColor == Color.Black)
                 {
@@ -298,6 +279,11 @@ namespace _1_лаба_ссп
                 else button1.BackColor = System.Drawing.Color.White;
                 if (richTextBox1.SelectionFont.Italic == true) button2.BackColor = System.Drawing.Color.DarkGray;
                 else button2.BackColor = System.Drawing.Color.White;
+
+                CustomFont custom = new CustomFont(richTextBox1.SelectionFont.FontFamily.Name, richTextBox1.SelectionFont.Size, richTextBox1.SelectionFont.Style, richTextBox1.SelectionColor);
+                for (int i = 0; i < listfont.Count; i++)
+                    if (listfont[i].EqualsCustom(custom) == true) { comboBox2.SelectedIndex = i; return; }
+                comboBox2.SelectedIndex = -1;
             }
             
         }
@@ -377,6 +363,7 @@ namespace _1_лаба_ссп
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             int a = comboBox2.SelectedIndex;
+            if (a == -1) return;
             ChangedParamCustom(listfont[a]);
             richTextBox1.SelectionFont = new Font(listfont[a].fontFamily, listfont[a].size, listfont[a].fontStyle);
             richTextBox1.SelectionColor = listfont[a].color;
@@ -390,25 +377,62 @@ namespace _1_лаба_ссп
                 CustomFont custom = new CustomFont(richTextBox1.SelectionFont.FontFamily.Name, richTextBox1.SelectionFont.Size, richTextBox1.SelectionFont.Style,richTextBox1.SelectionColor);
                 //listfont.Add(richTextBox1.SelectionFont);
                 //  listcolor.Add(richTextBox1.SelectionColor);
+                for (int i=0; i<listfont.Count; i++)
+                if (listfont[i].EqualsCustom(custom) == true) { 
+                    MessageBox.Show("Такой стиль уже существует");
+                    richTextBox1.Focus();
+                    return;
+                }
                 listfont.Add(custom);
                 combobox2++;
                 comboBox2.Items.Add("Стиль " + combobox2);
-                string jsonString = System.Text.Json.JsonSerializer.Serialize(listfont);
-                string json = JsonConvert.SerializeObject(listfont);
-                File.WriteAllText(@"C:\listfont.json", json);
             }
             richTextBox1.Focus();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            richTextBox1.SaveFile(@"C:\yest");
+            richTextBox1.SaveFile(textfile);
+            string jsonString = System.Text.Json.JsonSerializer.Serialize(listfont);
+            string json = JsonConvert.SerializeObject(listfont);
+            File.WriteAllText(jsonfile, json);
             richTextBox1.Focus();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            richTextBox1.LoadFile(@"C:\yest");
+            richTextBox1.LoadFile(textfile);
+            try
+            {
+                string jsonstring = File.ReadAllText(jsonfile);
+                var output = JsonConvert.DeserializeObject<List<CustomFont>>(jsonstring);
+                listfont = output;
+                combobox2 = listfont.Count;
+                // listfont.Add(output[0]);
+                //listfont = System.Text.Json.JsonSerializer.Deserialize<List<CustomFont>>(jsonstring);
+                comboBox2.Items.Clear();
+                if (listfont != null)
+                {
+                    for (int i = 1; i <= listfont.Count; i++) comboBox2.Items.Add("Стиль " + i);
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Error: ");
+            }
+            richTextBox1.Focus();
+        }
+
+        private void ChangedFont() {
+            if (richTextBox1.Text.Length != 0)
+            {
+                CustomFont custom = new CustomFont(richTextBox1.SelectionFont.FontFamily.Name, richTextBox1.SelectionFont.Size, richTextBox1.SelectionFont.Style, richTextBox1.SelectionColor);
+                //listfont.Add(richTextBox1.SelectionFont);
+                //  listcolor.Add(richTextBox1.SelectionColor);
+                listfont.Add(custom);
+                combobox2++;
+                comboBox2.Items.Add("Стиль " + combobox2);
+            }
             richTextBox1.Focus();
         }
 
