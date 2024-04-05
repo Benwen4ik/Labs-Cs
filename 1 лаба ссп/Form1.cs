@@ -23,8 +23,8 @@ namespace _1_лаба_ссп
 
         List<CustomFont> listfont = new List<CustomFont> { };
         int combobox2;
-        string jsonfile = @"C:\listfont2.json";
-        string textfile = @"C:\test";
+        string jsonfile = @"C:\listfont3.json";
+        string textfile = @"C:\test3";
 
 
 
@@ -208,10 +208,11 @@ namespace _1_лаба_ссп
                     button3.ForeColor = Color.Black;
                 }
             }
+           // lastColor = richTextBox1.SelectionColor;
             richTextBox1.Focus();
             // lastFont = richTextBox1.SelectionFont;
             if (richTextBox1.Text.Length != 0)
-            {
+             {
                 lastColor = richTextBox1.SelectionColor;
                // ChangedFont();
             }
@@ -280,7 +281,11 @@ namespace _1_лаба_ссп
                 if (richTextBox1.SelectionFont.Italic == true) button2.BackColor = System.Drawing.Color.DarkGray;
                 else button2.BackColor = System.Drawing.Color.White;
 
-                CustomFont custom = new CustomFont(richTextBox1.SelectionFont.FontFamily.Name, richTextBox1.SelectionFont.Size, richTextBox1.SelectionFont.Style, richTextBox1.SelectionColor);
+                if (richTextBox1.Text.Length != 0)
+                     lastColor = richTextBox1.SelectionColor;
+                    // lastFont = richTextBox1.SelectionFont;
+
+                    CustomFont custom = new CustomFont(richTextBox1.SelectionFont.FontFamily.Name, richTextBox1.SelectionFont.Size, richTextBox1.SelectionFont.Style, richTextBox1.SelectionColor);
                 for (int i = 0; i < listfont.Count; i++)
                     if (listfont[i].EqualsCustom(custom) == true) { comboBox2.SelectedIndex = i; return; }
                 comboBox2.SelectedIndex = -1;
@@ -293,9 +298,13 @@ namespace _1_лаба_ссп
 
             if (richTextBox1.Text.Length == 0)
             {
+              //  if (comboBox2.Items.Count != 0) lastColor = listfont.Last().color;
+                listfont.Clear();
+                combobox2 = 0;
+                comboBox2.Items.Clear();
+                ChangedParam(lastFont, lastColor);
                 richTextBox1.SelectionFont = lastFont;
                 richTextBox1.SelectionColor = lastColor;
-                ChangedParam(lastFont, lastColor);
             }
 
         }
@@ -356,7 +365,7 @@ namespace _1_лаба_ссп
                     button1.BackColor = System.Drawing.Color.DarkGray;
                     button2.BackColor = System.Drawing.Color.DarkGray;
                 }
-                else button1.BackColor = System.Drawing.Color.White;
+             //   else button1.BackColor = System.Drawing.Color.White;
             }
         }
 
@@ -374,36 +383,52 @@ namespace _1_лаба_ссп
         {
             if (richTextBox1.Text.Length != 0)
             {
-                CustomFont custom = new CustomFont(richTextBox1.SelectionFont.FontFamily.Name, richTextBox1.SelectionFont.Size, richTextBox1.SelectionFont.Style,richTextBox1.SelectionColor);
-                //listfont.Add(richTextBox1.SelectionFont);
-                //  listcolor.Add(richTextBox1.SelectionColor);
-                for (int i=0; i<listfont.Count; i++)
-                if (listfont[i].EqualsCustom(custom) == true) { 
-                    MessageBox.Show("Такой стиль уже существует");
-                    richTextBox1.Focus();
+                if (richTextBox1.SelectionFont != null)
+                {
+                    CustomFont custom = new CustomFont(richTextBox1.SelectionFont.FontFamily.Name, richTextBox1.SelectionFont.Size, richTextBox1.SelectionFont.Style, richTextBox1.SelectionColor);
+                    for (int i = 0; i < listfont.Count; i++)
+                        if (listfont[i].EqualsCustom(custom) == true)
+                        {
+                            MessageBox.Show("Такой стиль уже существует");
+                            richTextBox1.Focus();
+                            return;
+                        }
+                    listfont.Add(custom);
+                    combobox2++;
+                    comboBox2.Items.Add("Стиль " + combobox2);
+                } else
+                {
+                    MessageBox.Show("Выбрано несколько шрифтов");
                     return;
                 }
-                listfont.Add(custom);
-                combobox2++;
-                comboBox2.Items.Add("Стиль " + combobox2);
+                //listfont.Add(richTextBox1.SelectionFont);
+                //  listcolor.Add(richTextBox1.SelectionColor);
             }
             richTextBox1.Focus();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            richTextBox1.SaveFile(textfile);
-            string jsonString = System.Text.Json.JsonSerializer.Serialize(listfont);
-            string json = JsonConvert.SerializeObject(listfont);
-            File.WriteAllText(jsonfile, json);
+            try
+            {
+                richTextBox1.SaveFile(textfile);
+                string jsonString = System.Text.Json.JsonSerializer.Serialize(listfont);
+                string json = JsonConvert.SerializeObject(listfont);
+                File.WriteAllText(jsonfile, json);
+                //   File.WriteAllText(@"C:\QWERTY.TXT", richTextBox1.Text);
+                MessageBox.Show("Файл сохранен");
+            } catch
+            {
+                Console.WriteLine("Error ");
+            }
             richTextBox1.Focus();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            richTextBox1.LoadFile(textfile);
             try
             {
+                richTextBox1.LoadFile(textfile);
                 string jsonstring = File.ReadAllText(jsonfile);
                 var output = JsonConvert.DeserializeObject<List<CustomFont>>(jsonstring);
                 listfont = output;
@@ -416,7 +441,12 @@ namespace _1_лаба_ссп
                     for (int i = 1; i <= listfont.Count; i++) comboBox2.Items.Add("Стиль " + i);
                 }
             }
-            catch
+            catch (FileNotFoundException )
+            {
+                MessageBox.Show("Файл пуст");
+            }
+
+            catch 
             {
                 Console.WriteLine("Error: ");
             }
