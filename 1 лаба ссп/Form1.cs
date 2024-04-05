@@ -22,18 +22,12 @@ namespace _1_лаба_ссп
 
 
         List<CustomFont> listfont = new List<CustomFont> { };
-        List<Color> listcolor = new  List<Color> ();
         int combobox2;
 
-
-
-        static string path1 = @"C:\laba1.docx";   // путь к файлу
-        static string path2 = @"C:\set.txt";
       
         public Form1()
         {
 
-            //String[] font = new string[] { "Segoe UI", "Arial", "Times New Roman", "Segoe Script", "Broadway", "Tahoma" };
             InitializeComponent();
             comboBox1.Items.AddRange(font);
             comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -51,11 +45,10 @@ namespace _1_лаба_ссп
                 combobox2 = listfont.Count;
                 // listfont.Add(output[0]);
                 //listfont = System.Text.Json.JsonSerializer.Deserialize<List<CustomFont>>(jsonstring);
-             if (listfont != null)
-            {
-                for (int i = 1; i <= listfont.Count; i++) comboBox2.Items.Add("Стиль " + i);
-            }
-                // listfont = (List<Font>)output
+                if (listfont != null)
+                {
+                    for (int i = 1; i <= listfont.Count; i++) comboBox2.Items.Add("Стиль " + i);
+                }
             }
             catch 
             {
@@ -345,11 +338,6 @@ namespace _1_лаба_ссп
                 else button1.BackColor = System.Drawing.Color.White;
                 if (changeFont.Italic == true) button2.BackColor = System.Drawing.Color.DarkGray;
                 else button2.BackColor = System.Drawing.Color.White;
-                if (richTextBox1.Text.Length != 0)
-                {
-                    //lastFont = richTextBox1.SelectionFont;
-                    // lastColor = button3.BackColor;
-                }
             }
         }
 
@@ -377,11 +365,12 @@ namespace _1_лаба_ссп
                 else button1.BackColor = System.Drawing.Color.White;
                 if (changeFont.fontStyle == FontStyle.Italic) button2.BackColor = System.Drawing.Color.DarkGray;
                 else button2.BackColor = System.Drawing.Color.White;
-                if (richTextBox1.Text.Length != 0)
+                if (changeFont.fontStyle == (FontStyle.Bold | FontStyle.Italic))
                 {
-                    //lastFont = richTextBox1.SelectionFont;
-                    // lastColor = button3.BackColor;
+                    button1.BackColor = System.Drawing.Color.DarkGray;
+                    button2.BackColor = System.Drawing.Color.DarkGray;
                 }
+                else button1.BackColor = System.Drawing.Color.White;
             }
         }
 
@@ -423,8 +412,5 @@ namespace _1_лаба_ссп
             richTextBox1.Focus();
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-        }
     }
 }
